@@ -1,0 +1,39 @@
+<section class="students-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="sub-heading">Memory Search</span>
+      <h1 class="section-title">The Class Gallery</h1>
+      <p class="section-subtitle">Search through our 2027 Seniors batch and discover the stories that shaped us.</p>
+
+      <div class="search-wrapper">
+        <div class="search-container">
+          <input type="search" placeholder="Type your name" class="search-input" aria-label="Search students"
+            [(ngModel)]="query" (ngModelChange)="search()">
+          <div class="search-icon">🔍</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-container" *ngIf="students.length > 0; else loader">
+      <a class="student-card" *ngFor="let student of students" [routerLink]="['/students',student.Slug]" >
+        <div class="card-inner">
+          <div class="image-wrapper">
+            <img [src]="student.ProfileImage"
+              [alt]="student.Name" class="student-img" loading="lazy" />
+            <div class="card-overlay">
+              <span class="view-text">View Profile</span>
+            </div>
+          </div>
+          <div class="card-info">
+            <h3 class="student-name">{{ student.Name }}</h3>
+            <p class="student-tag">{{ student.Nickname }}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

@@ -1,0 +1,19 @@
+<nav class="navbar">
+    <div class="nav-container">
+        <a routerLink="/" class="logo">JLS Seniors <span class="year">'27</span></a>
+
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" #navToggle>
+        <label for="nav-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <div class="nav-links">
+            <a routerLink="/" class="nav-link" [routerLinkActiveOptions]="{ exact:true }" routerLinkActive="active-link" (click)="navToggle.checked = false">Home</a>
+            <a routerLink="/teachers" class="nav-link" routerLinkActive="active-link" (click)="navToggle.checked = false">Teachers</a>
+            <a routerLink="/memories" class="nav-link" routerLinkActive="active-link" (click)="navToggle.checked = false">Memories</a>
+            <a routerLink="/students" class="nav-link" routerLinkActive="active-link" (click)="navToggle.checked = false">Students</a>
+        </div>
+    </div>
+</nav>

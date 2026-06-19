@@ -1,0 +1,22 @@
+<section id="journey" class="timeline-section" data-aos="fade-up" data-aos-duration="900">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-down" data-aos-duration="900" data-aos-delay="150">The Journey</h2>
+
+    <div class="timeline-container">
+      <div class="timeline-line" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200"></div>
+
+      <div class="timeline-item" *ngFor="let chapter of journey; let i = index" [class.reverse]="i % 2 !== 0"
+        data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+        <div class="event-image">
+          <img [src]="chapter.image" [alt]="chapter.title" loading="lazy">
+        </div>
+        <div class="timeline-dot"></div>
+        <div class="event-text">
+          <span class="year">{{ chapter.year }}</span>
+          <h3>{{ chapter.title }}</h3>
+          <p>{{ chapter.caption }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

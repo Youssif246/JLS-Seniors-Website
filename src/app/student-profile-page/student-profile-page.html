@@ -1,0 +1,53 @@
+<section id="top" class="profile-page" data-aos="fade-up" data-aos-duration="900">
+    <div class="profile-container" data-aos="fade-up" data-aos-duration="900" data-aos-delay="150">
+        <a routerLink="/students" class="back-link" data-aos="fade-down" data-aos-duration="700" data-aos-delay="200">←
+            Back to Search</a>
+
+        <ng-container *ngIf="studentData; else loader">
+            <div class="profile-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="250">
+                <div class="profile-image" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300">
+                        <img
+                        [src]="studentData.ProfileImage"
+                        [alt]="studentData.Name"
+                        />
+                </div>
+                <div class="profile-summary" data-aos="fade-left" data-aos-duration="900" data-aos-delay="350">
+                    <p class="sub-heading">Student Profile</p>
+                    <h1>{{ studentData.Name }}</h1>
+                    <p class="nickname">"{{ studentData.Nickname }}"</p>
+                    <p class="quote" *ngIf="studentData.Qoute">“{{ studentData.Qoute }}”</p>
+                    <p class="dream" *ngIf="studentData.Dream">Dream: {{ studentData.Dream }}</p>
+                    <div class="profile-description">
+                        <h2 *ngIf="studentData.Description">About Me</h2>
+                        <p *ngIf="studentData.Description">{{ studentData.Description }}</p>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="studentImages.length > 0">
+                <div class="gallery-section" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">
+                    <h2 data-aos="fade-down" data-aos-duration="800">Gallery</h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-item" *ngFor="let image of studentImages">
+                            <img
+                            [src]="getImageUrl(image)"
+                            [alt]="studentData.Name"
+                            class="gallery-image"
+                            loading="lazy"
+                            />
+                        </div>
+                    </div>
+                </div>    
+            </ng-container>
+
+        </ng-container>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <a [routerLink]="['/students', studentSlug]" class="scroll-top-btn" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </a>
+</section>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

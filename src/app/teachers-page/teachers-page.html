@@ -1,0 +1,66 @@
+<section class="faculty-hall-page">
+  <div class="hall-container">
+
+    <!-- 1. Hero Section -->
+    <header class="hall-hero">
+      <span class="hall-hero-label">Mentors & Guides</span>
+      <h1 class="hall-hero-title serif">The Teachers Who Shaped Our Journey</h1>
+      <p class="hall-hero-subtitle">
+        In recognition of the educators who walked alongside us, imparting wisdom, inspiring excellence, and leaving an indelible mark on the Class of 2027.
+      </p>
+      <div class="hall-gold-line"></div>
+    </header>
+
+    <!-- 2. Faculty Portrait Exhibition (Staggered Layout) -->
+    <main class="exhibition-gallery" *ngIf="teachersData.length > 0; else loader">
+      <a 
+        *ngFor="let teacher of teachersData; let i = index" 
+        [routerLink]="['/teachers', teacher.slug]"
+        class="exhibition-item"
+        data-aos="fade-up"
+        data-aos-duration="700"
+        [attr.data-aos-delay]="(i % 2) * 100"
+        [attr.aria-label]="'View legacy of ' + teacher.name"
+      >
+        <div class="exhibition-photo-frame">
+          <img 
+            [src]="teacher.profilePhoto" 
+            [alt]="teacher.name" 
+            class="exhibition-img" 
+            loading="lazy" 
+          />
+          <div class="exhibition-overlay-accent"></div>
+        </div>
+        <div class="exhibition-meta">
+          <h3 class="exhibition-name serif">{{ teacher.name }}</h3>
+          <p class="exhibition-subject">{{ teacher.subject }}</p>
+        </div>
+      </a>
+    </main>
+
+    <!-- 3. Appreciation Section -->
+    <footer class="hall-appreciation">
+      <div class="divider-graduation">
+        <span class="gold-tassel-line"></span>
+        <span class="graduation-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
+          </svg>
+        </span>
+        <span class="gold-tassel-line"></span>
+      </div>
+      <div class="appreciation-content">
+        <h2 class="appreciation-title serif">With Deepest Gratitude</h2>
+        <p class="appreciation-text">
+          To our teachers, you did not just teach lessons; you built the foundations of our future. Your guidance, patience, and dedication will be carried with us long after we leave these halls. Thank you for making our journey unforgettable.
+        </p>
+        <p class="appreciation-salute">The Class of 2027</p>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

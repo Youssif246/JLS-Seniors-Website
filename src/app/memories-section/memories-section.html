@@ -1,0 +1,23 @@
+<section id="memories" class="memories-section" data-aos="fade-up" data-aos-duration="1000">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-down" data-aos-duration="800">Shared Memories</h2>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">Moments that will last
+      forever in our hearts.</p>
+
+    <div class="memories-grid">
+      <div class="memory-card" *ngFor="let memory of sharedMemories" data-aos="zoom-in-up" data-aos-duration="600">
+        <div class="memory-img-wrapper">
+          <img [src]="memory.image" [alt]="memory.title" loading="lazy">
+          <div class="memory-overlay">
+            <h3>{{ memory.title }}</h3>
+            <p>{{ memory.caption }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="memories-see-more" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+      <a routerLink="/memories" class="btn-see-more">See More</a>
+    </div>
+  </div>
+</section>

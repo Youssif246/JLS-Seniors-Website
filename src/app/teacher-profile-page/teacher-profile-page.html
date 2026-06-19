@@ -1,0 +1,75 @@
+<section class="teacher-profile-page">
+  <!-- Interactive Mesh Background -->
+  <div class="mesh-background">
+    <div class="mesh-blob blob-1"></div>
+    <div class="mesh-blob blob-2"></div>
+    <div class="mesh-blob blob-3"></div>
+  </div>
+<ng-container *ngIf="teacherData">
+  <div class="container">
+    <nav class="profile-nav">
+      <a routerLink="/teachers" class="back-link">
+        <div class="back-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </div>
+        <span>All Teachers</span>
+      </a>
+      <div class="class-badge">Class of 2027</div>
+    </nav>
+
+    <ng-container *ngIf="teacherData; else loader">
+      <div class="profile-hero">
+        <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
+          <div class="subject-tag">
+            <span class="tag-dot"></span>
+            {{ teacherData.subject }}
+          </div>
+
+          <h1 class="hero-name">{{ teacherData.name }}</h1>
+
+          <div class="message-card spotlight-card">
+            <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+            <p class="hero-message">{{ teacherData.message }}</p>
+          </div>
+        </div>
+
+        <div class="hero-visual" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
+          <div class="portrait-container">
+            <div class="portrait-glow"></div>
+            <img [src]="teacherData.profilePhoto" [alt]="teacherData.name" class="portrait-image" />
+          </div>
+        </div>
+      </div>
+      <section id="video-section" class="video-section" data-aos="fade-up" data-aos-duration="1000" *ngIf="teacherData.video">
+        <div class="section-header">
+          <h2>A Message to 2027</h2>
+          <div class="header-line"></div>
+        </div>
+
+        <div class="showcase-video-wrapper">
+          <video
+            class="clean-video"
+            preload="metadata"
+            controls
+            muted
+            playsinline>
+            <source [src]="teacherData.video" type="video/mp4">
+          </video>
+        </div>
+      </section>
+    </ng-container>
+
+  </div>
+</ng-container>
+</section>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

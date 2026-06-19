@@ -1,0 +1,82 @@
+<section id="teachers" class="teachers-section" aria-labelledby="teachers-heading">
+  <div class="teachers-backdrop" aria-hidden="true">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <div class="container teachers-container">
+    <div class="teachers-header" data-aos="fade-up" data-aos-duration="1000">
+      <div class="badge">Mentors & Guides</div>
+      <h2 id="teachers-heading" class="section-title">The Architects of Our Journey</h2>
+      <p class="section-subtitle">
+        To the educators who went beyond the syllabus, inspiring us and shaping the Class of 2027.
+      </p>
+    </div>
+
+  <swiper-container
+      *ngIf="teachersData.length > 0; else loader"
+      navigation="true"
+      pagination="true"
+      rewind="true"
+      observer="true"
+      observe-parents="true"
+      space-between="24"
+      breakpoints='{
+        "0": {
+          "slidesPerView": 1
+        },
+        "768": {
+          "slidesPerView": 2
+        },
+        "1024": {
+          "slidesPerView": 3
+        }
+      }'
+  >
+  <swiper-slide
+        *ngFor="let teacher of teachersData; let i = index"
+        data-aos="zoom-in-up"
+        data-aos-duration="800">
+      <article class="teacher-card">
+        <a
+          class="teacher-card-link"
+          [routerLink]="['/teachers', teacher.slug]"
+          [attr.aria-label]="'View profile of ' + teacher.name"
+        >
+          <div class="card-image-wrapper">
+            <img
+              [src]="teacher.profilePhoto || teacher.image"
+              [alt]="teacher.name"
+              loading="lazy"
+              class="teacher-image"
+            />
+            <div class="image-overlay"></div>
+          </div>
+          
+          <div class="card-info">
+            <div class="info-content">
+              <span class="teacher-subject">{{ teacher.subject }}</span>
+              <h3 class="teacher-name">{{ teacher.name }}</h3>
+            </div>
+            <div class="explore-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </article>
+    </swiper-slide>
+    </swiper-container>
+    <div class="button">
+      <a data-aos="zoom-in-up" data-aos-duration="800" routerLink="/teachers" class="btn-see-more">See All Teachers</a>
+    </div>
+  </div>
+
+</section>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

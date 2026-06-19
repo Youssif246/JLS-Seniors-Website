@@ -1,0 +1,393 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  --navy-medium: var(--primary-color, #1a237e);
+  --navy-dark: #101850;
+  --accent-gold: var(--accent-color, #d4af37);
+  --accent-gold-soft: rgba(212, 175, 55, 0.08);
+  --bg-cream: #faf7f2;
+  --text-muted: var(--text-muted, #5d6d7e);
+  --card-border: rgba(212, 175, 55, 0.22);
+}
+
+.faculty-hall-page {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--bg-color, #fdfbf7) 0%, var(--bg-cream) 100%);
+  color: var(--text-color, #2c3e50);
+  overflow: hidden;
+  padding: 100px 0 60px;
+}
+
+/* --- Backdrop Glow (Keep unchanged) --- */
+.hall-glow-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.backdrop-gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(26, 35, 126, 0.04) 0%, transparent 60%);
+}
+
+.hall-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* --- Navigation Header (Keep unchanged) --- */
+.hall-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(26, 35, 126, 0.05);
+}
+
+.hall-back-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--navy-medium);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: opacity 0.2s ease;
+}
+
+.hall-back-link:hover {
+  opacity: 0.8;
+}
+
+.back-chevron {
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.hall-back-link:hover .back-chevron {
+  transform: translateX(-3px);
+}
+
+.hall-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: var(--accent-gold-soft);
+  border: 1.5px solid rgba(212, 175, 55, 0.25);
+  color: #b3922e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* --- Hero Section (Keep unchanged) --- */
+.hall-hero {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 50px;
+}
+
+.hall-hero-label {
+  display: block;
+  color: var(--accent-gold);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.hall-hero-title {
+  font-size: clamp(1.8rem, 6.5vw, 3rem);
+  color: var(--navy-medium);
+  line-height: 1.2;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.hall-hero-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0 auto;
+}
+
+.hall-gold-line {
+  height: 1px;
+  width: 120px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  margin: 24px auto 0;
+}
+
+/* ==========================================================================
+   REDESIGNED: Faculty Portrait Exhibition Gallery
+   ========================================================================== */
+
+.exhibition-gallery {
+  /* 2-column from the smallest viewport up */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+  row-gap: 40px;
+  margin: 30px auto 80px;
+  max-width: 620px;
+  /* Reserve bottom space so offset even-items don't clip */
+  padding-bottom: 24px;
+}
+
+.exhibition-item {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--text-color, #2c3e50);
+  background: transparent;
+  /* No transition on the item itself — only on the frame */
+}
+
+/* Right column items shifted down to create yearbook stagger rhythm */
+.exhibition-item:nth-child(even) {
+  transform: translateY(24px);
+}
+
+/* Consistent Aspect Ratio & Double Border Framing */
+.exhibition-photo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(16, 27, 77, 0.12); /* Navy outer line */
+  box-shadow: 0 10px 30px rgba(16, 27, 77, 0.05);
+  background: var(--navy-dark);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.exhibition-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  transition: transform 0.4s ease;
+  will-change: transform;
+}
+
+/* Gold inner highlight outline border on hover */
+.exhibition-overlay-accent {
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 7px;
+  transition: border-color 0.3s ease;
+}
+
+/* Metadata underneath the portrait frame */
+.exhibition-meta {
+  padding-top: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.exhibition-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--navy-medium);
+  margin: 0;
+  line-height: 1.3;
+  transition: color 0.25s ease;
+}
+
+.exhibition-subject {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin: 0;
+}
+
+/* --- Subtle Hover Transformations (GPU Optimized) --- */
+@media (hover: hover) and (pointer: fine) {
+  .exhibition-item:hover .exhibition-photo-frame {
+    transform: translateY(-5px);
+    border-color: var(--accent-gold);
+    box-shadow: 0 15px 35px rgba(212, 175, 55, 0.18);
+  }
+
+  .exhibition-item:hover .exhibition-overlay-accent {
+    border-color: rgba(212, 175, 55, 0.45);
+  }
+
+  .exhibition-item:hover .exhibition-img {
+    transform: scale(1.025);
+  }
+
+  .exhibition-item:hover .exhibition-name {
+    color: var(--accent-gold);
+  }
+}
+
+.exhibition-item:active .exhibition-photo-frame {
+  transform: scale(0.985);
+}
+
+/* --- Tablet & Up: Wider spacing, larger stagger --- */
+@media (min-width: 600px) {
+  .exhibition-gallery {
+    column-gap: 48px;
+    row-gap: 60px;
+    max-width: 720px;
+    padding-bottom: 36px;
+  }
+
+  .exhibition-item:nth-child(even) {
+    transform: translateY(36px);
+  }
+
+  .exhibition-name {
+    font-size: 1rem;
+  }
+
+  .exhibition-subject {
+    font-size: 0.7rem;
+  }
+}
+
+/* --- Desktop: More breathing room, wider max-width --- */
+@media (min-width: 900px) {
+  .exhibition-gallery {
+    column-gap: 64px;
+    row-gap: 72px;
+    max-width: 860px;
+  }
+
+  .exhibition-item:nth-child(even) {
+    transform: translateY(40px);
+  }
+
+  .exhibition-name {
+    font-size: 1.1rem;
+  }
+}
+
+/* --- Appreciation Section (Keep unchanged) --- */
+.hall-appreciation {
+  margin-top: 50px;
+  text-align: center;
+  padding: 40px 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  box-shadow: 0 8px 30px rgba(16, 27, 77, 0.03);
+}
+
+.divider-graduation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.gold-tassel-line {
+  height: 1px;
+  width: 60px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+.graduation-icon {
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.graduation-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.appreciation-content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.appreciation-title {
+  font-size: 1.6rem;
+  color: var(--navy-medium);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.appreciation-text {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0 auto 20px;
+}
+
+.appreciation-salute {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent-gold);
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ========================================================================== */
+
+@media (min-width: 600px) {
+  .faculty-hall-page {
+    padding: 120px 0 80px;
+  }
+
+  .hall-hero {
+    margin-bottom: 60px;
+  }
+
+  .exhibition-meta {
+    padding-top: 18px;
+    gap: 6px;
+  }
+
+  .exhibition-name {
+    font-size: 1.2rem;
+  }
+
+  .exhibition-subject {
+    font-size: 0.76rem;
+    letter-spacing: 2px;
+  }
+
+  .hall-appreciation {
+    padding: 50px 30px;
+    margin-top: 90px;
+  }
+
+  .gold-tassel-line {
+    width: 100px;
+  }
+}

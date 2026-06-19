@@ -1,0 +1,90 @@
+<main class="memories-page">
+  <!-- HERO -->
+  <header class="mp-hero">
+    <div class="mp-hero-overlay"></div>
+
+    <div class="mp-hero-inner">
+      <span class="mp-badge">JLS Seniors '27</span>
+
+      <h1 class="mp-hero-title">
+        Our Cinematic <em>Memories</em>
+      </h1>
+
+      <p class="mp-hero-text">
+        Every laugh, every late night, every cap in the air — captured in the moments that made us who we are.
+      </p>
+
+      <button [routerLink]="['/memories']" fragment="featured" class="mp-hero-cta">Explore the Gallery</button>
+    </div>
+
+  </header>
+
+  <ng-container *ngIf="memoriesImages.length > 0; else loader">
+  <!-- FEATURED -->
+  <section class="mp-featured">
+    <div class="mp-wrap" id="featured">
+      <span class="mp-label">Featured</span>
+
+      <h2 class="mp-heading">Moments That Defined Us</h2>
+
+      <article class="mp-feature-card mp-animate" *ngFor="let featuredMemory of featuredMemories">
+        <img
+          [src]="featuredMemory.imageSrc"
+          alt="JLS Seniors 2027 — featured memory" loading="lazy" />
+        <div class="mp-feature-overlay">
+          <span class="mp-feature-tag">{{ featuredMemory.tag }}</span>
+        </div>
+      </article>
+    </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="mp-gallery" id="gallery">
+      <div class="mp-wrap">
+        <span class="mp-label">The Archive</span>
+
+        <h2 class="mp-heading">Senior Memories</h2>
+
+        <p class="mp-sub">Memories that stay forever.</p>
+
+        <div class="mp-masonry">
+
+          <div class="mp-tile mp-animate" *ngFor="let image of memoriesImages">
+            <div class="mp-polaroid-frame">
+              <img [src]="getImageUrl(image)" alt="JLS Seniors 2027" loading="lazy" />
+              <div class="mp-polaroid-caption">JLS Seniors '27</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </ng-container>
+
+  <!-- ENDING -->
+  <footer class="mp-outro">
+    <div class="mp-wrap mp-outro-inner">
+      <p class="mp-outro-eyebrow">Fin · JLS '27</p>
+
+      <h2 class="mp-outro-title">
+        Thank you for the memories
+      </h2>
+
+      <p class="mp-outro-text">
+        The journey never truly ends.
+      </p>
+
+      <a routerLink="/students" class="mp-btn">
+        Explore Students
+      </a>
+
+      <a routerLink="/" class="mp-btn mp-btn--ghost">
+        Back Home
+      </a>
+    </div>
+  </footer>
+</main>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

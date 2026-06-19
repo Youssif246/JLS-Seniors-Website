@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <title>JLS Seniors 2027</title>
+  <base href="/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- SEO -->
+  <meta name="description"
+    content="JLS Seniors 2027 is a platform showcasing graduation memories, student profiles, and special moments in a modern and elegant way." />
+  <meta name="keywords" content="JLS, Seniors 2027, Graduation, Students, Memories, School, Yearbook" />
+  <meta name="author" content="JLS Seniors 2027" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="JLS Seniors 2027" />
+  <meta property="og:description" content="Explore the best graduation moments and memories of JLS Seniors 2027." />
+
+  <meta property="og:image" content="https://jls-seniors27.netlify.app/sharedImagev1.png" />
+
+  <meta property="og:image:secure_url" content="https://jls-seniors27.netlify.app/sharedImagev1.png" />
+
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta property="og:url" content="https://jls-seniors27.netlify.app/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="JLS Seniors 2027" />
+  <meta name="twitter:description" content="Explore the best graduation moments and memories of JLS Seniors 2027." />
+
+  <meta name="twitter:image" content="https://jls-seniors27.netlify.app/sharedImagev1.png" />
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#D4AF37" />
+
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <link rel="stylesheet" href="preloader.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-57V52DLVL8"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-57V52DLVL8');
+  </script>
+</head>
+
+<body>
+  <!-- Elegant Preloader -->
+  <div id="insane-preloader">
+    <div class="preloader-content">
+      <div class="loader-container">
+        <div class="loader-ring"></div>
+        <div class="loader-logo">JLS<span>'27</span></div>
+      </div>
+      <div class="loader-text">Seniors</div>
+      <div class="loader-subtext">Loading Memories...</div>
+    </div>
+  </div>
+
+  <app-root></app-root>
+
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100,
+      easing: 'ease-out-cubic'
+    });
+
+    const refreshAOS = () => {
+      if (window.AOS && typeof window.AOS.refresh === 'function') {
+        window.AOS.refresh();
+      }
+    };
+
+    const fireLocationChange = () => window.dispatchEvent(new Event('locationchange'));
+
+    const originalPushState = history.pushState;
+    const originalReplaceState = history.replaceState;
+
+    history.pushState = function () {
+      const result = originalPushState.apply(this, arguments);
+      fireLocationChange();
+      return result;
+    };
+
+    history.replaceState = function () {
+      const result = originalReplaceState.apply(this, arguments);
+      fireLocationChange();
+      return result;
+    };
+
+    window.addEventListener('popstate', refreshAOS);
+    window.addEventListener('locationchange', refreshAOS);
+
+    // Function to hide the preloader
+    const hidePreloader = () => {
+      const preloader = document.getElementById('insane-preloader');
+
+      if (preloader && !preloader.classList.contains('loaded')) {
+        preloader.classList.add('loaded');
+
+        // wait for split animation
+        setTimeout(() => preloader.remove(), 1200);
+      }
+    };
+
+    // Remove preloader after fully loaded
+    window.addEventListener('load', function () {
+      setTimeout(hidePreloader, 1200);
+    });
+
+    // Failsafe
+    setTimeout(hidePreloader, 6000);
+  </script>
+</body>
+
+</html>
